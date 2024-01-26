@@ -32,6 +32,7 @@ export class ScraperController {
                     if (parsedData.status === 'Completed') {
                         return res.status(200).json({ status: 'Completed', processId, result: parsedData.result });
                     }
+                    return res.status(200).json({ status: 'Not ready', processId });
                 }
             }
 
