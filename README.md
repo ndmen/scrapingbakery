@@ -24,7 +24,33 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This repository contains the implementation of a web scraping API designed to retrieve product information from a specified URL. The API is built using NestJS and employs asynchronous processing to handle requests efficiently.
+
+Features
+- Receives requests containing a product ID and initiates asynchronous processing.
+- Responds with an HTTP 200 status code and a unique process identifier upon request reception.
+- Initiates the scraping process of the target URL and transforms the website data into a unified JSON format.
+- Includes a 10-second timeout to simulate data processing.
+- Responds with a "not ready" status if queried with the process identifier during the timeout period.
+- Provides the final result via the same endpoint after the processing is complete.
+
+Note
+
+- This project uses NestJS and cache for processing purposes. In a real-world scenario, Redis would be used for processing, and PostgreSQL for storing results.
+
+Data Retrieval Methods
+
+To retrieve product information as per the requirements outlined in the task, the following methods were considered:
+
+1. Open Graph in Meta Tags: Parsing meta tags with Open Graph protocol to extract product information.
+
+2. Schema Parsing: Extracting product details from structured data using schema markup.
+
+3. HTML Markup Parsing: Parsing HTML markup to identify and extract product information.
+
+4. Script Tag Parsing: Extracting data from JavaScript scripts embedded within the HTML.
+
+For the given task, the preferred method of data retrieval was Script Tag Parsing. This method was chosen because it provided the necessary information required by the task. Specifically, it allowed for the extraction of product identifiers and specifications required for further processing.
 
 ## Installation
 
@@ -35,27 +61,19 @@ $ npm install
 ## Running the app
 
 ```bash
-# development
-$ npm run start
 
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## Using documentation
+
+Open swagger http://localhost:3000/swagger/#/scraper/ScraperController_scrapeProduct and try to send post method with data:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+{
+  "productId": "air-presto-mens-shoes-JlLlWz"
+}
 ```
 
 ## Support
